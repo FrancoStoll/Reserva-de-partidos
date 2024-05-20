@@ -17,9 +17,7 @@ export const createOrder = async (date: Date, selectedTime: string) => {
 
     await prisma.order.create({
         data: {
-            day: date.getDate().toString(),
-            month: date.getMonth().toString(),
-            year: date.getFullYear().toString(),
+            date: date,
             hour: selectedTime
         }
     })
