@@ -1,3 +1,4 @@
+"use client";
 import { schedules } from "@/data/schedules";
 import { Order } from "@prisma/client";
 
@@ -14,8 +15,11 @@ export const HourTabs = ({
   date,
   setSelectedTime,
 }: Props) => {
-  console.log(new Date().getDay());
-  if (date.getDay().toString() < new Date().getDay().toString())
+  // Aplico esta funcion para que no me tome el dia actual como deshabilitado
+  let nowDate = new Date();
+  nowDate.setDate(nowDate.getDate() - 1);
+
+  if (date < nowDate)
     return (
       <p className="text-center w-72 h-56 flex items-center">
         No se puede seleccionar días anteriores

@@ -2,14 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import { Calendar } from "./ui/calendar";
-
-import { schedules } from "@/data/schedules";
 import { Button } from "./ui/button";
 import { meses } from "@/data/meses";
 import { useRouter } from "next/navigation";
 import { useOrder } from "@/store/store";
 import { OrderProps } from "@/types/types";
 import { HourTabs } from "./HourTabs";
+import { toast } from "./ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 export const CalendarPick = ({ orders }: OrderProps) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -19,6 +19,16 @@ export const CalendarPick = ({ orders }: OrderProps) => {
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!date || !selectedTime) {
+      return toast({
+        variant: "destructive",
+        title: "Seleccionar dia y hora",
+        description: "Debes Seleccionar un dia y una hora para poder reservar",
+        action: <ToastAction altText="Try again"></ToastAction>,
+        duration: 2500,
+      });
+    }
 
     setDateHourStore(date!, selectedTime!);
     router.push("dashboard/checkout");

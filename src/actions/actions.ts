@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from "@/lib/prisma"
+import { revalidatePath } from "next/cache"
 
 
 
@@ -21,7 +22,7 @@ export const createOrder = async (date: Date, selectedTime: string) => {
             hour: selectedTime
         }
     })
-
+    revalidatePath('/dashboard')
     return {
         ok: true,
         message: 'Reserve created succesfully'
