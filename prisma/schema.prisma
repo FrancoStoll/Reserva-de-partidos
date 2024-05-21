@@ -16,10 +16,15 @@ model User {
   name     String?
   password String
   telefono String
+  Order    Order[]
+  role     String
 }
 
 model Order {
   id   String   @id @default(uuid())
   date DateTime
   hour String
+
+  cliente      User   @relation(fields: [clienteEmail], references: [email])
+  clienteEmail String
 }

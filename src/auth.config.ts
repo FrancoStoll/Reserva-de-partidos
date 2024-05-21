@@ -1,5 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 
+
 export const authConfig = {
     pages: {
         signIn: '/auth/login',
@@ -16,6 +17,21 @@ export const authConfig = {
             }
             return true;
         },
+        // Le paso la infromacion del user al json web token
+        // El usuario que recibo aca es el que retorno en la function authorize usando prisma
+        jwt({ token, user }) {
+
+            if (user) {
+                token.data = user;
+            }
+            return token
+        },
+        // y luego se la paso a la funcion
+        session({ session, token, user }) {
+            session.user = token.data as any;
+            return session
+        },
+
     },
     providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;

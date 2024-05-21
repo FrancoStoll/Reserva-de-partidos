@@ -38,17 +38,17 @@ export const CalendarPick = ({ orders }: OrderProps) => {
       <p className="text-2xl font-extrabold tracking-tight my-5 bg-primary rounded-md py-2">
         Reservar para el dia {date?.getDate()} de {meses[date?.getMonth()!]}
       </p>
-      <div className="flex justify-center gap-10">
+      <div className="grid md:grid-cols-2">
         <div>
           <p className="mb-10">Selecctionar día</p>
           <Calendar
             mode="single"
             selected={date}
             onSelect={setDate}
-            className="rounded-md border"
+            className="rounded-md grid place-items-center"
           />
         </div>
-        <div>
+        <div className="grid place-items-center">
           <p className="mb-10">Seleccionar hora</p>
           <form
             className="w-80 h-80 flex flex-col gap-11"

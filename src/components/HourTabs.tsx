@@ -1,4 +1,5 @@
 "use client";
+import { MAX_ORDER_FOR_HOUR } from "@/config/constants";
 import { schedules } from "@/data/schedules";
 import { Order } from "@prisma/client";
 
@@ -29,12 +30,13 @@ export const HourTabs = ({
   return (
     <>
       {schedules.map((time, index) => {
-        const isDisabled = orders.some((order) => {
-          const currentDateISO = date?.toISOString().split("T")[0];
-          const orderDateIso = order.date.toISOString().split("T")[0];
+        const ordersForTime = orders.filter(
+          (order) =>
+            order.date.toISOString().split("T")[0] ===
+              date.toISOString().split("T")[0] && order.hour === time
+        );
 
-          return currentDateISO === orderDateIso && order.hour === time;
-        });
+        const isDisabled = ordersForTime.length >= MAX_ORDER_FOR_HOUR; // ej;2 ;
 
         return (
           <span
@@ -42,7 +44,7 @@ export const HourTabs = ({
             className={`${
               selectedTime === time && "bg-primary text-primary-foreground"
             } text-sm border rounded-xl py-2 px-1 cursor-pointer ${
-              isDisabled && "bg-destructive text-gray-500 cursor-not-allowed"
+              isDisabled && "bg-destructive text-gray-400 cursor-not-allowed"
             }`}
             onClick={() => (isDisabled ? null : setSelectedTime(time))}
           >

@@ -4,14 +4,17 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "name" TEXT,
     "password" TEXT NOT NULL,
-    "telefono" TEXT NOT NULL
+    "telefono" TEXT NOT NULL,
+    "role" TEXT NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "date" DATETIME NOT NULL,
-    "hour" TEXT NOT NULL
+    "hour" TEXT NOT NULL,
+    "clienteEmail" TEXT NOT NULL,
+    CONSTRAINT "Order_clienteEmail_fkey" FOREIGN KEY ("clienteEmail") REFERENCES "User" ("email") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex

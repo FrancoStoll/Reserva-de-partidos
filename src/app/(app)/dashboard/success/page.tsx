@@ -1,23 +1,26 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function SuccessPage() {
-
-  const router = useRouter()
+  const router = useRouter();
   return (
-    <div className="mx-auto flex justify-center flex-col items-center my-24">
+    <div className="mx-auto flex justify-center flex-col items-center">
       <div>
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Order paid correctly
+          Orden pagada correctamente
         </h1>
         <p className="text-xl text-muted-foreground">
-          A modal dialog that interrupts the user with important content and
-          expects a response.
+          Puedes ver todas tus reservas haciendo click en el boton de abajo
         </p>
-        <Button className="mt-2" onClick={() => router.push('/')}>Back to top</Button>
+        <Button
+          className="mt-2"
+          onClick={() => router.push("/dashboard/reservas")}
+        >
+          Ver Reservas
+        </Button>
       </div>
 
       <Image
@@ -26,7 +29,6 @@ export default function SuccessPage() {
         height={700}
         alt="lgo"
         className="mt-10 rounded-md opacity-65"
-        
       />
     </div>
   );

@@ -13,6 +13,7 @@ export const PayForm = () => {
   const router = useRouter();
   const date = useOrder((state) => state.date);
   const hour = useOrder((state) => state.selectedHour);
+  const resetStore = useOrder((state) => state.resetStore);
   const handlePayment = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Aquí iría la lógica para procesar el pago
@@ -34,7 +35,7 @@ export const PayForm = () => {
       description: order.message,
       action: <ToastAction altText="Goto schedule to undo">Cerrar</ToastAction>,
     });
-
+    resetStore();
     router.push("/dashboard/success");
   };
   return (
