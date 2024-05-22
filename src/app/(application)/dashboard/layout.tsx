@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   const session = await auth();
 
   return (
-    <main>
+    <main className="flex flex-col max-w-7xl mx-auto">
       <nav className="flex justify-between items-center py-5 px-4">
         <h2 className="scroll-m-20  pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           Fútbol 5
@@ -28,7 +28,7 @@ export default async function DashboardLayout({
                 await signOut();
               }}
             >
-              <Button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-background 0 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+              <Button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-primary 0 p-3 text-sm font-medium hover:bg-secondary hover:text-primary  md:flex-none md:justify-start md:p-2 md:px-3">
                 <LogOutIcon className="w-6" />
                 <div className="hidden md:block">Sign Out</div>
               </Button>

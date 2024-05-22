@@ -29,8 +29,8 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           {/* <ModeToggle /> */}
-
-          <main className="max-w-7xl mx-auto">{children}</main>
+          <div className="gradient-background" />
+          {children}
           <Toaster />
         </ThemeProvider>
       </body>

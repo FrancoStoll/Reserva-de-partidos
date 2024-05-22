@@ -27,21 +27,21 @@ export const MobileMenu = () => {
               <ul className="items-center gap-2 md:hidden cursor-pointer space-y-3">
                 <li
                   className={`${
-                    pathName === "/dashboard" && "border-b"
+                    pathName === "/dashboard" && "border-b text-primary border-primary"
                   } "leading-7"`}
                 >
                   <Link href="/dashboard">Seleccionar</Link>
                 </li>
                 <li
                   className={`${
-                    pathName === "/dashboard/reservas" && "border-b"
+                    pathName === "/dashboard/reservas" && "border-b text-primary border-primary"
                   } "leading-7"`}
                 >
                   <Link href="/dashboard/reservas">Ver Reservas</Link>
                 </li>
                 <li
                   className={`${
-                    pathName === "/dashboard/predio" && "border-b"
+                    pathName === "/dashboard/predio" && "border-b text-primary border-primary"
                   } "leading-7"`}
                 >
                   <Link href="/dashboard/predio">Imagenes del predio</Link>
