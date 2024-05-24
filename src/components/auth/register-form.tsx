@@ -1,15 +1,16 @@
 "use client";
-import { useFormState, useFormStatus } from "react-dom";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { authenticate } from "@/actions/auth/actions";
-import { AlertCircleIcon, LogInIcon } from "lucide-react";
-import Link from "next/link";
+import { createUser } from "@/actions/auth/actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { AlertCircleIcon, LogInIcon, ThumbsUp } from "lucide-react";
+import { useFormStatus, useFormState } from "react-dom";
+import Link from 'next/link';
 
-export const LoginForm = () => {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+const initialState = "";
 
+export const RegisterForm = () => {
+  const [message, dispatch] = useFormState(createUser, initialState);
 
   return (
     <form
@@ -27,7 +28,22 @@ export const LoginForm = () => {
           placeholder="jhondoe@correo.com"
           required
           type="text"
-          defaultValue="correo@correo.com"
+        />
+        <Label htmlFor="name">Nombre</Label>
+        <Input
+          name="name"
+          id="name"
+          placeholder="Cosme Fulanito"
+          required
+          type="text"
+        />
+        <Label htmlFor="phoneNumber">Telefono</Label>
+        <Input
+          name="phoneNumber"
+          id="phoneNumber"
+          placeholder="3454473489"
+          required
+          type="tel"
         />
         <Label htmlFor="password">Password</Label>
         <Input
@@ -36,26 +52,22 @@ export const LoginForm = () => {
           placeholder="**************"
           required
           type="password"
-          defaultValue="123123"
         />
         <LoginButton />
         <div
           className="flex h-8 items-end space-x-1"
           aria-live="polite"
           aria-atomic="true"
-        >
-          {errorMessage && (
+        >                                                   
+          {message.startsWith("Error") && (
             <>
               <AlertCircleIcon className="h-5 w-5 text-red-500" />
-              <p className="text-sm text-red-500">{errorMessage}</p>
+              <p className="text-sm text-red-500">{message}</p>
             </>
           )}
         </div>
-        <Link
-          href="/auth/register"
-          className="text-sm text-muted-foreground underline"
-        >
-          ¿No tienes una cuenta? Crea una con simples pasos.
+        <Link href="/auth/login" className="text-sm text-muted-foreground underline">
+          ¿Ya tienes una cuenta? Ingresa aquí.
         </Link>
       </div>
     </form>

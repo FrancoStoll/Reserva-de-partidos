@@ -8,13 +8,18 @@ export const authConfig = {
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
+
             const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-            if (isOnDashboard) {
+            const isOnAdmin = nextUrl.pathname.startsWith('/admin');
+            if (isOnDashboard || isOnAdmin) {
                 if (isLoggedIn) return true;
                 return false; // Redirect unauthenticated users to login page
             } else if (isLoggedIn) {
+                if (auth?.user.role === "admin") {
+                    return Response.redirect(new URL('/admin', nextUrl))
+                }
                 return Response.redirect(new URL('/dashboard', nextUrl));
-            }
+            } 
             return true;
         },
         // Le paso la infromacion del user al json web token

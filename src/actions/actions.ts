@@ -23,7 +23,7 @@ export const createOrder = async (date: Date, selectedTime: string) => {
 
     await prisma.order.create({
         data: {
-            date: date,
+            date: date.toISOString().split("T")[0] + "T00:00:00.000Z",
             hour: selectedTime,
             clienteEmail: clientEmail
         }
@@ -46,13 +46,36 @@ export const searchOrder = async () => {
     const reserves = await prisma.order.findMany({
         where: {
             clienteEmail: session?.user?.email
-        }, 
+        },
 
     })
-  
+
     return {
         ok: true,
         reserves: reserves
 
+    }
+}
+
+
+export const createOrderByAdmin = async (date: Date, selectedTime: string): Promise<{ ok: boolean, message: string }> => {
+
+
+
+    const user = await prisma.order.create({
+        data: {
+            date: date.toISOString().split("T")[0] + "T00:00:00.000Z",
+            hour: selectedTime,
+            clienteEmail: "correo@correo.com"
+        }
+    })
+
+    revalidatePath('/dashboard')
+    revalidatePath('/admin')
+    revalidatePath('/admin/create')
+
+    return {
+        ok: true,
+        message: 'Reserve created succesfully'
     }
 }

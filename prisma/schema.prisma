@@ -17,14 +17,14 @@ model User {
   password String
   telefono String
   Order    Order[]
-  role     String
+  role     String  @default("cliente")
 }
 
 model Order {
-  id   String   @id @default(uuid())
-  date DateTime
-  hour String
-
-  cliente      User   @relation(fields: [clienteEmail], references: [email])
+  id           String   @id @default(uuid())
+  date         DateTime
+  hour         String
+  isPaid       String?
+  cliente      User     @relation(fields: [clienteEmail], references: [email])
   clienteEmail String
 }
