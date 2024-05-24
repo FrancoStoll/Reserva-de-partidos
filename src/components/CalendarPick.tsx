@@ -46,6 +46,7 @@ export const CalendarPick = ({ orders }: OrderProps) => {
             selected={date}
             onSelect={setDate}
             className="rounded-md grid place-items-center"
+            required
           />
         </div>
         <div className="grid place-items-center">

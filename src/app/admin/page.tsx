@@ -1,8 +1,11 @@
 import prisma from "@/lib/prisma";
 import { ReserveGrid } from "./ReserveGrid";
-import { OrderProps } from "@/types/types";
-import { formatDate } from "@/config/formatDate";
 
+
+export const metadata = {
+  title: 'Reservas Hoy - Futbol 5 Total',
+  description: 'Reservas Hoy - Futbol 5 Total',
+ };
 export default async function AdminPage() {
   const today =
     new Date(Date.now()).toISOString().split("T")[0] + "T00:00:00.000Z";

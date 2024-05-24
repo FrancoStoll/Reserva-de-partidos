@@ -1,6 +1,11 @@
 import { CalendarPickerAdmin } from "@/components/admin/CalendarPickerAdmin";
 import prisma from "@/lib/prisma";
 
+export const metadata = {
+  title: 'Crear Reserva - Futbol 5 Total',
+  description: 'Crear Reserva - Futbol 5 Total',
+ };
+
 export default async function CreatePage() {
   const orders = await prisma.order.findMany();
 

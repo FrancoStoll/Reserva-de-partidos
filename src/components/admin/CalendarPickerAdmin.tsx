@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { HourTabs } from "@/components/HourTabs";
 import { toast } from "@/components/ui/use-toast";
 import { createOrderByAdmin } from "@/actions/actions";
+import { schedules } from "../../data/schedules";
 
 export const CalendarPickerAdmin = ({ orders }: OrderProps) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -54,6 +55,7 @@ export const CalendarPickerAdmin = ({ orders }: OrderProps) => {
             mode="single"
             selected={date}
             onSelect={setDate}
+            required
             className="rounded-md grid place-items-center"
           />
         </div>
